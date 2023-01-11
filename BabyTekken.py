@@ -2,7 +2,7 @@ import random
 import time
 
 # TekkenLUL
-
+#
 phealth = 100
 static_char = ["Heihachi", "King", "Devil Jin", "Yoshimitsu"]
 avail_char = ["Heihachi", "King", "Devil Jin", "Yoshimitsu"]
