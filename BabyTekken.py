@@ -123,7 +123,8 @@ def fight():
         fight()
 
     elif p1 == 4 and p2 == 4:
-        print("You both attacked. Both figters suffer 7 damage.")
+        print("You Both Dodged")
+        print("Neither Fighter Takes Damage")
         c.health -= 7
         p.health -= 7
         time.sleep(.5)
@@ -131,7 +132,8 @@ def fight():
         fight()
 
     elif p1 == 3 and p2 == 3:
-        print("You both dodged")
+        print("You both Blocked")
+        print("Neither Fighter Takes Damage")
         time.sleep(.5)
         input("Press enter to continue...")
         fight()
@@ -148,6 +150,20 @@ def fight():
         p.health -= 8
         print("Light Beats Heavy")
         print(f"{p.name} suffered 8 damage.")
+        time.sleep(.5)
+        input("Press enter to continue...")
+        fight()
+
+    elif p1 == 3 and p2 == 4:
+        print("Block and Dodge")
+        print("Neither Fighter Takes Damage")
+        time.sleep(.5)
+        input("Press enter to continue...")
+        fight()
+
+    elif p1 == 4 and p2 == 3:
+        print("Block and Dodge")
+        print("Neither Fighter Takes Damage")
         time.sleep(.5)
         input("Press enter to continue...")
         fight()
