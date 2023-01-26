@@ -1,72 +1,209 @@
 import random
-dict = ["naruto", 
-"ichigo",
-"rukia",
-"sasuke",
-"saitama",
-"grimjow",
-"luffy",
-"zoro",
-"sanji",
-"chopper",
-"goku",
-"gogeta",
-"gon",
-"killua",
-"inuyasha",
-"sakura",
-"jiraiya",
-"mikasa",
-"eren",
-"frieza",
-"vegeta",
-"cell",
-"gohan",
-"piccolo",
-]
-r = random.randint(0, len(dict)-1)
-word = dict[r]
-g = [] #Code checks here
-dash = [] #Dash list
-graveyard = []
-controlword = []
 
-for i in word:
-  g.append(i)
-  controlword.append(i)
-
-for i in g:
-  dash.append("-")
-
-print(*dash, sep = " ")
-
-guesses = 7
-
-while guesses > 0:
-  print(f"You have {guesses} guesses.")
+def game():
+  dict = dict = ["naruto", 
+  "ichigo",
+  "rukia",
+  "sasuke",
+  "saitama",
+  "grimjow",
+  "luffy",
+  "zoro",
+  "sanji",
+  "chopper",
+  "goku",
+  "gogeta",
+  "gon",
+  "killua",
+  "inuyasha",
+  "sakura",
+  "jiraiya",
+  "mikasa",
+  "eren",
+  "frieza",
+  "vegeta",
+  "cell",
+  "gohan",
+  "piccolo",
+  "my hero academia",
+  "attack on titan",
+  "chainsaw man",
+  "dragon ball z",
+  "deku",
+  "aizen",
+  ]
   
-  guess = input("Guess: ").lower()
+  print("***********************")
+  print("**Welcome to Hangman!**")
+  print("***********************")
+  print("If you know the word. Just type it out.")
   
-  if guess in graveyard:
-    print("You've said that already")
-  elif guess in g:
-    graveyard.append(guess)
-    print("Yes!")
-    while guess in g:
-      x = g.index(guess)
-      dash[x] = guess
-      g[x] = "-"
-  elif guess not in g:
-    graveyard.append(guess)
-    print(f"Their are no {guess}'s.")
-    guesses -= 1
+  r = random.randint(0, len(dict)-1)
+  word = dict[r]
+  g = [] #Code checks here and alters guessed letters to "-"
+  dash = [] #Dash list / printed for user's to guess 
+  graveyard = [] #used letters
+  controlword = [] #list used to check for win
+  
+  for i in word:
+    g.append(i)
+    controlword.append(i)
+  
+  for i in g:
+    dash.append("-")
     
-  if dash == controlword:
-    print(*dash, sep = " ")
-    print("You Saved Him!!!")
-    break
-  elif guesses <= 0:
-    print("You Killed Him!!!")
-    print(f"The word is '{word}'...")
-      
+  if " " in g:
+    while " " in g:
+      x = g.index(" ")
+      dash[x] = " "
+      g[x] = "-"
+  
   print(*dash, sep = " ")
+  
+  guesses = 7
+  
+  
+  while guesses > 0:
+    print(f"You have {guesses} guesses.")
+    
+    if guesses == 7:
+      print("""
+      |-------|
+      |       
+      |
+      |
+      |
+      |
+      |
+      |""")
+    elif guesses == 6:
+      print("""
+      |-------|
+      |       o
+      |
+      |
+      |
+      |
+      |
+      |""")
+    elif guesses == 5:
+      print("""
+      |-------|
+      |       o
+      |
+      |
+      |
+      |
+      |
+      |""")
+    elif guesses == 4:
+      print("""
+      |-------|
+      |       o
+      |       |
+      |
+      |
+      |
+      |
+      |""")
+    elif guesses == 3:
+      print("""
+      |-------|
+      |       o
+      |       |
+      |       |
+      |
+      |
+      |
+      |""")
+    elif guesses == 2:
+      print("""
+      |-------|
+      |       o
+      |      /|\\
+      |       |
+      |
+      |
+      |
+      |""")
+    elif guesses == 1:
+      print("""
+      |-------|
+      |       o
+      |      /|\\
+      |       |
+      |      /
+      |
+      |
+      |""")
+    
+    guess = input("Guess: ").lower()
+    
+    if guess in graveyard:
+      print("You've said that already")
+    elif len(guess) > 1:
+      if guess == word:
+        print("You Saved Him!!!")
+        print("""
+        |-------|
+        |       
+        |   
+        |       
+        |          O/
+        |         /|
+        |          |
+        |         /\  """)
+        print(f"The word was '{word}'!!!")
+        break
+      else:
+        print("That is not correct.")
+        guesses -= 1
+    elif guess in g:
+      graveyard.append(guess)
+      print("Yes!")
+      while guess in g:
+        x = g.index(guess)
+        dash[x] = guess
+        g[x] = "-"
+    elif guess not in g:
+      graveyard.append(guess)
+      print(f"Their are no {guess}'s.")
+      guesses -= 1
+      
+    if dash == controlword:
+      print(*dash, sep = " ")
+      print("You Saved Him!!!")
+      print("""
+        |-------|
+        |       
+        |   
+        |       
+        |          O/
+        |         /|
+        |          |
+        |         /\  """)
+      
+      break
+    elif guesses <= 0:
+      print("You Killed Him!!!")
+      print("""
+      |-------|
+      |       o
+      |      /|\\
+      |       |
+      |      /\\
+      |
+      |
+      |""")
+      print(f"The word is '{word}'...")
+      a = input("Want to play again?").lower()
+      
+      if a == "y" or "yes":
+        game()
+      elif a == "n" or "no":
+
+        break
+        
+    print(*dash, sep = " ")
+    
+game()
