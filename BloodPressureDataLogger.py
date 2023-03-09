@@ -1,35 +1,44 @@
+import time
+from datetime import datetime
+
 #DataLogger
 
-print("Press 'q' anytime to quit.")
+print("Press 'q' anytime to quit. Press 'd' to display log.")
 
-date = ""
-bp = ""
-dictbp = {}
-dicthr = {}
-hr = 0
+def display():
+  f = open("BloodPressureLogs.txt", "r")
+  print(f.read())
+  log()
 
-while date != "q" and bp != "q":
+def log():
+  date = ""
+  bp = ""
+  dictbp = {}
+  dicthr = {}
+  hr = 0
   
-  date = input("Date: ")
-  if date == "q":
-    break
-  else:
-    bp = input("Blood Pressure: ")
+  while True:
+    t = datetime.now()
+    
+    bp = input("Blood Pressure: ").lower()
     if bp == "q":
       break
+    elif bp == "d":
+      display()
     else:
       if hr == "q":
         break
+      elif hr == "d":
+        display()
       else:
-        hr = input("Heart Rate: ")
-
-  dictbp[date] = "Blood Pressure: " + str(bp)
-  dicthr[date] = "Heart Rate: " + str(hr)
+        hr = input("Heart Rate: ").lower()
   
-  f = open("BloodPressureLogs.txt", "a")
-  f.write("\nDate: " + date)
-  f.write(" \nBlood Pressure: " + str(bp) + "\nHeart Rate: " + str(hr))
-  f.close()
-  
-f = open("BloodPressureLogs.txt", "r")
-print(f.read())
+    dictbp[t] = "Blood Pressure: " + str(bp)
+    dicthr[t] = "Heart Rate: " + str(hr)
+    
+    f = open("BloodPressureLogs.txt", "a")
+    f.write("******************** \nDate: " + str(t))
+    f.write(" \nBlood Pressure: " + str(bp) + "\nHeart Rate: " + str(hr) + "\n********************")
+    f.close()
+    
+log()
