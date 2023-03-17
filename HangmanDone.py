@@ -1,5 +1,15 @@
 import random
 
+def again():
+  options = ["y", "yes", "n", "no"]
+  a = input("Would you like to play again? ").lower()
+
+  if a == "y" or "yes":
+    game()
+  elif a == "n" or "n":
+    print("Come back anytime!")
+    exit
+
 def game():
   dict = dict = ["naruto", 
   "ichigo",
@@ -154,7 +164,7 @@ def game():
         |          |
         |         /\  """)
         print(f"The word was '{word}'!!!")
-        break
+        again()
       else:
         print("That is not correct.")
         guesses -= 1
@@ -183,7 +193,7 @@ def game():
         |          |
         |         /\  """)
       
-      break
+      again()
     elif guesses <= 0:
       print("You Killed Him!!!")
       print("""
@@ -196,13 +206,7 @@ def game():
       |
       |""")
       print(f"The word is '{word}'...")
-      a = input("Want to play again?").lower()
-      
-      if a == "y" or "yes":
-        game()
-      elif a == "n" or "no":
-
-        break
+      again()
         
     print(*dash, sep = " ")
     
